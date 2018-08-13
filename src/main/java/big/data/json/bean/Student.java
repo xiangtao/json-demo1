@@ -5,15 +5,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-@JsonIgnoreProperties(value = {"age"},ignoreUnknown = true)
+//@JsonIgnoreProperties(value = {"age"},ignoreUnknown = true)
 public class Student {
 
-    @JsonProperty
+    //@JsonProperty
     private String name;
     private int age;
 
-    @JsonIgnore
+    //@JsonIgnore
     private boolean status;
+
+    private byte[] b;
+
+    private int [] i;
 
     public String getName() {
         return name;
@@ -37,6 +41,23 @@ public class Student {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+
+    public byte[] getB() {
+        return b;
+    }
+
+    public void setB(byte[] b) {
+        this.b = b;
+    }
+
+    public int[] getI() {
+        return i;
+    }
+
+    public void setI(int[] i) {
+        this.i = i;
     }
 
     @Override

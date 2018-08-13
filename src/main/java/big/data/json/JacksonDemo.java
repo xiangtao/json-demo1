@@ -2,9 +2,6 @@ package big.data.json;
 
 import big.data.json.bean.Student;
 import big.data.json.bean.ds.DataSource;
-import big.data.json.bean.ds.DataSourceType;
-import big.data.json.bean.ds.MYSQLDataSourceProperties;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,7 +19,7 @@ import java.util.*;
  * demo
  * @author taox
  */
-public class JsonDemo {
+public class JacksonDemo {
 
     static ObjectMapper mapper = new ObjectMapper();
     static {
@@ -38,6 +35,9 @@ public class JsonDemo {
         student.setName("\u0061");
         student.setAge(18);
         student.setStatus(true);
+        student.setB(new byte[]{'1','2'});
+        student.setI(new int[]{1,2});
+
 
         //输出json字符串
         String str = mapper.writeValueAsString(student);
@@ -49,7 +49,7 @@ public class JsonDemo {
 
     }
 
-    //结合映射
+    //集合映射
     @Test
     public  void simpleCollection() throws IOException {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -103,6 +103,7 @@ public class JsonDemo {
     }
 
 
+    //unicode 字符
     @Test
     public void testUnicodeString() throws IOException {
         String json1 = "{\"name\":\"\\u0061\"}";
@@ -122,7 +123,7 @@ public class JsonDemo {
 
     //-----------private -------------
     private static String readConfig() throws IOException {
-        InputStream is = JsonDemo.class.getClassLoader().getResourceAsStream("datasource-config.json");
+        InputStream is = JacksonDemo.class.getClassLoader().getResourceAsStream("datasource-config.json");
         List<String> lines = IOUtils.readLines(is, "utf-8");
         StringBuilder sb = new StringBuilder();
         for (String line : lines) {
